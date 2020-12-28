@@ -6,7 +6,7 @@ galaxy_info:
   license: BSD
   galaxy_tags:
     - elasticsearch
-    - elasticsearch_prometheus
+    - prometheus
   platforms:
     - name: debian
       versions:
