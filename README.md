@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A role to install `Elasticsearch` cluster.
+A role to install `Elasticsearch` cluster. (currently supports only `Debian`)
 
 Role Variables
 --------------
@@ -26,6 +26,8 @@ Other variables defined in defaults/main.yml are:
     es_cluster_initial_master_nodes: sets cluster.initial_master_nodes config property. default: "{{ elasticsearch_hosts }}"
     es_discovery_seed_hosts: sets discovery.seed_hosts elasticsearch config property. default: "{{ elasticsearch_hosts }}"
     
+Note that, if proxy_url variable is set, then tries to install `Elasticsearch` through proxy.
+
 Dependencies
 ------------
 
