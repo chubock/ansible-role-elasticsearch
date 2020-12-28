@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  role_name: elasticsearch
+  description: Install Elasticsearch cluster
+dependencies:
+  - chubock.java

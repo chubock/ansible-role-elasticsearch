@@ -1,0 +1,21 @@
+---
+- include: install.yml
+  when: proxy_url is not defined
+
+- include: install_with_proxy.yml
+  when: proxy_url is defined
+
+- name: creating /etc/elasticsearch/elasticsearch.yml configuration file
+  template:
+    src: "{{ es_config_template }}"
+    dest: /etc/elasticsearch/elasticsearch.yml
+  notify: restart elasticsearch service
+
+- name: enabling and starting elasticsearch service
+  systemd:
+    name: elasticsearch
+    state: started
+    enabled: yes
+
+- include: elasticsearch_exporter.yml
+  when: elasticsearch_exporter|bool == true

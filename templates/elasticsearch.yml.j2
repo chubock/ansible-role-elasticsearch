@@ -1,0 +1,19 @@
+cluster:
+  name: {{ es_cluster_name }}
+  initial_master_nodes:
+{% for host in es_cluster_initial_master_nodes %}
+    - "{{ host }}"
+{% endfor %}
+node:
+  name: {{ es_node_name }}
+  master: {{ es_node_master }}
+path:
+  data: {{ es_data_path }}
+  logs: {{ es_log_path }}
+network:
+  host: {{ es_network_host }}
+discovery:
+  seed_hosts:
+{% for host in es_discovery_seed_hosts %}
+    - "{{ host }}"
+{% endfor %}

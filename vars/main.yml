@@ -1,0 +1,4 @@
+---
+es_data_path: /var/lib/elasticsearch
+es_log_path: /var/log/elasticsearch
+es_network_host: ["_local_", "_site_"]

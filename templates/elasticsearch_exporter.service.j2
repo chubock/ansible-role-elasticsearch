@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus exporter for Elasticsearch
+Wants=network-online.target
+After=elasticsearch.target
+
+[Service]
+WorkingDirectory={{ elasticsearch_exporter_home }}
+ExecStart={{ elasticsearch_exporter_home }}/elasticsearch_exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

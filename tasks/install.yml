@@ -1,0 +1,19 @@
+---
+- name: installing gnupg2
+  apt:
+    name: gnupg2
+    state: present
+
+- name: adding apt key https://packages.elastic.co/GPG-KEY-elasticsearch
+  apt_key:
+    url: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: adding apt repostiroy deb https://artifacts.elastic.co/packages/7.x/apt stable main
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+
+- name: installing elasticsearch
+  apt:
+    name: elasticsearch
+    state: present

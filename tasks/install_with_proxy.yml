@@ -1,0 +1,35 @@
+---
+- name: setting apt proxy in /etc/apt/apt.conf
+  lineinfile:
+    dest: /etc/apt/apt.conf
+    state: present
+    create: yes
+    line: 'Acquire::http::Proxy "{{ proxy_url }}";'
+
+- name: installing gnupg2
+  apt:
+    name: gnupg2
+    state: present
+
+- name: installing curl
+  apt:
+    name: curl
+
+- name: adding apt key file for GPG-KEY-elasticsearch
+  shell:
+    cmd: "curl -sx {{ proxy_url }} https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -"
+
+- name: adding apt repostiroy deb https://artifacts.elastic.co/packages/7.x/apt stable main
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+
+- name: installing elasticsearch
+  apt:
+    name: elasticsearch
+    state: present
+
+- name: removing apt proxy
+  lineinfile:
+    dest: /etc/apt/apt.conf
+    state: absent
+    regexp: '^Acquire::http::Proxy .*";'
