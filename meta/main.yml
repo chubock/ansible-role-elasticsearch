@@ -7,5 +7,9 @@ galaxy_info:
   galaxy_tags:
     - elasticsearch
     - elasticsearch_prometheus
+  platforms:
+    - name: debian
+      versions:
+        - 10
 dependencies:
   - chubock.java
