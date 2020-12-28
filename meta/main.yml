@@ -2,5 +2,10 @@
 galaxy_info:
   role_name: elasticsearch
   description: Install Elasticsearch cluster
+  author: Hassan Moosavi
+  license: BSD
+  galaxy_tags:
+    - elasticsearch
+    - elasticsearch_prometheus
 dependencies:
   - chubock.java
