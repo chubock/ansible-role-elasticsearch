@@ -18,4 +18,4 @@
     enabled: yes
 
 - include: elasticsearch_exporter.yml
-  when: elasticsearch_exporter|bool == true
+  when: elasticsearch_exporter
