@@ -3,6 +3,11 @@ Role Name
 
 A role to install `Elasticsearch` cluster. (currently supports only `Debian`)
 
+Requirements
+------------
+
+`Elasticsearch` requires `Java`. if `Java` is installed on the hosts, specify it's location via `java_home` environment variable. Otherwise, `chubock.java` role which this role declares a dependency on will install `java` at `java_home` location. for more information about `chubock.java` visit [ansible-role-java](https://github.com/chubock/ansible-role-java). 
+
 Role Variables
 --------------
 
@@ -19,6 +24,10 @@ Other variables defined in defaults/main.yml are:
     es_node_name: sets node.name elasticsearch config property. default: "{{inventory_hostname}}"
     es_node_master: sets node.master elasticsearch config property. default: true
     
+    stable_rolling_update: indicates whether to wait for the culster state to became green or not. default: true
+    stable_rolling_update_retries: number of retries for getting cluster state. default: 24
+    stable_rolling_update_delay: seconds to wait after each retry to get the cluster state. default: 5
+
     elasticsearch_exporter: indicates whether to install prometheus exporter for elasticsearch or not. default: true
     elasticsearch_exporter_home: path to install prometheus elasticsearch exporter. default: /var/lib/prometheus
     
@@ -31,7 +40,7 @@ Note that, if proxy_url variable is set, then tries to install `Elasticsearch` t
 Dependencies
 ------------
 
-Depends on `chubock.java` role.
+Depends on `chubock.java` role. for more information about `chubock.java` visit [ansible-role-java](https://github.com/chubock/ansible-role-java).
 
 Example Playbook
 ----------------
@@ -40,9 +49,9 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: elasticsearch
       roles:
-         - { role: chubock.elasticsearch, es_cluster_name: dev }
+         - { role: chubock.elasticsearch, es_cluster_name: dev, stable_rolling_update: false }
 
 License
 -------
 
-BSD
+Apache-2

@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
+  become: true
   roles:
-    - elasticsearch
+    - { role: chubock.elasticsearch, stable_rolling_update: false }
+  serial: 1

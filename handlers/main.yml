@@ -1,9 +1,4 @@
 ---
-- name: restart elasticsearch service
-  systemd:
-    name: elasticsearch
-    state: restarted
-
 - name: restart elasticsearch_exporter service
   systemd:
     name: elasticsearch_exporter

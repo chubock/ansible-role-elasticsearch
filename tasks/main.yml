@@ -9,13 +9,24 @@
   template:
     src: "{{ es_config_template }}"
     dest: /etc/elasticsearch/elasticsearch.yml
-  notify: restart elasticsearch service
 
 - name: enabling and starting elasticsearch service
   systemd:
     name: elasticsearch
-    state: started
+    state: restarted
     enabled: yes
+
+- name: Pause until cluster is stable
+  uri:
+    url: "http://localhost:9200/_cluster/health"
+    method: GET
+    status_code: 200,-1
+  register: _result
+  until: _result.status == 200 and _result.json.status == "green"
+  retries: "{{ stable_rolling_update_retries }}"
+  delay: "{{ stable_rolling_update_delay }}"
+  become: no
+  when: stable_rolling_update
 
 - include: elasticsearch_exporter.yml
   when: elasticsearch_exporter

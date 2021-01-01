@@ -5,6 +5,9 @@ es_cluster_name: elasticsearch
 es_node_name: "{{inventory_hostname}}"
 es_node_master: true
 
+stable_rolling_update: true
+stable_rolling_update_retries: 24
+stable_rolling_update_delay: 5
 elasticsearch_exporter: true
 elasticsearch_exporter_home: /var/lib/prometheus
 
