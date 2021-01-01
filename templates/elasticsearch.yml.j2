@@ -11,7 +11,7 @@ path:
   data: {{ es_data_path }}
   logs: {{ es_log_path }}
 network:
-  host: {{ es_network_host }}
+  host: {{ es_network_host | to_json }}
 discovery:
   seed_hosts:
 {% for host in es_discovery_seed_hosts %}
